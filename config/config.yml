@@ -1,0 +1,19 @@
+
+detecter:
+    weights: detecter/weights/best.pt    #model.pt path(s)
+    conf_thres: 0.25            #object confidence threshold
+    iou_thres: 0.45             #IOU threshold for NMS'
+    agnostic_nms: null          #'class_agnostic NMS')
+    augment: null               #augmented inference')
+    update: null                #'update all models')
+    recognize_job: True
+cron: #api service get new data
+    day_of_week: 'mon-sun'
+    hour: 06
+    minute: '01' 
+
+
+job_agv_price: #get, transform, insert
+    day_of_week: 'mon-sun'
+    hour: '*/1'
+    minute: '*/02' 
