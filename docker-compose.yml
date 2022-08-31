@@ -1,0 +1,72 @@
+version: "3"
+services:
+    # krabbitmq:
+    #     hostname: krabbitmq
+    #     image: rabbitmq:latest
+    #     volumes:
+    #         - "./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf"
+    #     ports:
+    #         - "5672:5672"
+    # kredis:
+    #     hostname: kredis
+    #     image: redis:latest
+    #     ports:
+    #         - "6379:6379"
+
+
+    api:
+        build:
+            context: .
+            dockerfile: Dockerfile.api
+        image: go2joy_hprs_api
+        environment:
+            - NUM_WORKERS=3
+            # - DATABASE_URL=mssql+pymssql://anhlbt:lbtanh@10.166.2.245/ICR
+            # - BROKER_CONN_URI=amqp://newadmin:P@ssw0rd1@10.166.2.208:5672
+            # - BACKEND_CONN_URI=redis://10.166.2.140:6379/10
+            - BROKER_CONN_URI=amqp://guest:guest@krabbitmq:5672
+            - BACKEND_CONN_URI=redis://kredis:6379/10            
+        volumes:
+            - ~/docker/hotel_price_recommender/uploads:/usr/src/app/uploads
+            - ~/docker/hotel_price_recommender/logs:/usr/src/app/logs
+        ports:
+            - "5006:5005"
+        command: "./entrypoint.sh"
+        # depends_on:
+        #     - krabbitmq
+        #     - kredis           
+    
+    
+    # myworkers:
+    #     build:
+    #         context: .
+    #         dockerfile: Dockerfile.worker
+    #     image: go2joy_hprs_worker
+    #     environment:
+    #         - WORKERNAME=localhost
+    #         - NUM_CONCURRENT=8  
+    #         - BROKER_CONN_URI=amqp://guest:guest@krabbitmq:5672
+    #         - BACKEND_CONN_URI=redis://kredis:6379/10
+    #         # - DEVICE=cuda:0
+    #     volumes:
+    #         - ~/hotel_price_recommender/uploads:/usr/src/app/uploads
+    #         - ~/hotel_price_recommender/logs:/usr/src/app/logs
+    #     # expose:
+    #     #     - "5672"
+    #     #     - "6379"
+    #     command: "./entrypoint_w.sh"    
+    #     depends_on:
+    #         - krabbitmq
+    #         - kredis
+
+    cron_jobs:
+        build:
+            context: .
+            dockerfile: Dockerfile.cronjob
+        image: go2joy_cronjob
+        environment:
+            - NUM_WORKERS=1           
+        volumes:
+            - ~/docker/hotel_price_recommender/uploads:/usr/src/app/uploads
+            - ~/docker/hotel_price_recommender/logs:/usr/src/app/logs
+        command: "./entrypoint_cronjob.sh"

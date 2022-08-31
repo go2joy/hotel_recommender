@@ -1,0 +1,41 @@
+FROM python:3.8-slim
+
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
+# Install linux packages
+RUN apt-get update && apt-get install -y libgl1-mesa-glx protobuf-compiler libprotoc-dev libb64-0d libglib2.0-0 \
+    libgomp1 gcc curl && rm -rf /var/lib/apt/lists/*
+
+# Install python dependencies
+COPY requirements.txt .
+RUN python -m pip install pip
+RUN python -m pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# Create working directory
+RUN mkdir -p /usr/src/app
+
+RUN mkdir -p /usr/src/app/logs
+RUN mkdir -p /usr/src/app/uploads
+WORKDIR /usr/src/app
+
+# Copy contents
+
+COPY ./go2joy.py /usr/src/app/
+COPY ./utils /usr/src/app/utils
+COPY ./worker /usr/src/app/worker
+COPY ./config /usr/src/app/config
+COPY ./db /usr/src/app/db
+COPY ./entrypoint_w.sh /usr/src/app/
+COPY ./config/config.yml /usr/src/app/config/
+
+# Set environment variables
+ENV HOME=/usr/src/app
+RUN chmod +x ./entrypoint_w.sh
+
+ENTRYPOINT [ "bash"]
+CMD [ "entrypoint_w.sh" ]
+
+
+

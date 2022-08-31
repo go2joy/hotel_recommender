@@ -156,4 +156,5 @@ select SN, NAME
 from DISTRICT
 """
 
-lst_query = [get_user_booking, get_hotel, get_hotel_setting, get_province, get_district, get_app_user, get_room_type]
+lst_query = [get_user_booking, get_hotel]
+# lst_query = [get_user_booking, get_hotel, get_hotel_setting, get_province, get_district, get_app_user, get_room_type]

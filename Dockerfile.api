@@ -1,0 +1,36 @@
+# Start FROM Nvidia PyTorch image https://ngc.nvidia.com/catalog/containers/nvidia:pytorch
+FROM python:3.8-slim
+
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
+# Install linux packages
+RUN apt-get update && apt-get install -y libgl1-mesa-glx protobuf-compiler libprotoc-dev libb64-0d libglib2.0-0 \
+    libgomp1 gcc curl && rm -rf /var/lib/apt/lists/*
+
+# Install python dependencies
+COPY requirements.txt .
+RUN python -m pip install pip
+RUN python -m pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# Install python dependencies
+RUN apt install tzdata
+# RUN apt install -y poppler-utils
+ENV TZ="Asia/Ho_Chi_Minh"
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+
+# Create working directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# Copy contents
+COPY . /usr/src/app
+
+# Set environment variables
+ENV HOME=/usr/src/app
+RUN chmod +x ./entrypoint.sh
+ENTRYPOINT [ "bash"]
+CMD [ "entrypoint.sh" ]
+

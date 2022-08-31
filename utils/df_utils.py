@@ -43,12 +43,7 @@ def get_data():
         
     user_booking = results[0]
     data_hotel = results[1]
-    v_hotel_setting = results[2]
-    province= results[3]
-    district= results[4]
-    app_user= results[5]
-    room_type=results[6]
-    return user_booking, data_hotel, v_hotel_setting,province, district, app_user, room_type
+    return user_booking, data_hotel
 
 
 def combine_booking_time(row):
@@ -134,10 +129,10 @@ def remove_noise_by_percentile(df, q_min, q_max, lst_col=['waiting_time']):
     return df
 
 
-def get_data_user_booking(user_booking, v_hotel_setting, lst_hotel, province, district, booking_type = [1, 2, 3], booking_status = [0, 1, 2, 3,4,5]):
+def get_data_user_booking(user_booking, lst_hotel, booking_type = [1, 2, 3], booking_status = [0, 1, 2, 3,4,5]):
     user_booking = user_booking.loc[(user_booking['CREATE_TIME'] >= '2020-01-01')]
-    tbs_user_booking = user_booking.merge(v_hotel_setting, how = 'left', left_on='HOTEL_SN', right_on='HOTEL_SN')
-    tbs_user_booking = tbs_user_booking.query('TYPE in @booking_type and BOOKING_STATUS in @booking_status')
+    # tbs_user_booking = user_booking.merge(v_hotel_setting, how = 'left', left_on='HOTEL_SN', right_on='HOTEL_SN')
+    tbs_user_booking = user_booking.query('TYPE in @booking_type and BOOKING_STATUS in @booking_status')
     tbs_user_booking = split_booking_time(tbs_user_booking)
 
     tbs_user_booking = tbs_user_booking[(tbs_user_booking["HOTEL_SN"]!=467)]
@@ -145,9 +140,6 @@ def get_data_user_booking(user_booking, v_hotel_setting, lst_hotel, province, di
     tbs_user_booking = tbs_user_booking.dropna(how = 'any', subset=['b_time'])
     tbs_user_booking = tbs_user_booking.merge(lst_hotel, how = 'left', left_on='HOTEL_SN', right_on='SN', suffixes=('', '_HOTEL'))
 
-    tbs_user_booking = tbs_user_booking.merge(province.loc[:, ['SN', 'NAME']], how = 'left', left_on='PROVINCE_SN', right_on ='SN', suffixes = ('', '_PROVINCE'))
-    tbs_user_booking = tbs_user_booking.merge(district.loc[:, ['SN', 'NAME']], how = 'left', left_on='DISTRICT_SN', right_on ='SN', suffixes = ('', '_DISTRICT'))
-    # Discard the columns that acquired a suffix
     tbs_user_booking = tbs_user_booking[[c for c in tbs_user_booking.columns if not c.endswith('_delme')]]
 
     tbs_user_booking = split_datetime(tbs_user_booking)
@@ -172,8 +164,6 @@ def preprocess_data_booking(df):
 def process_data_hotel(data_user_booking, lst_hotel):
     group_hotel_booking = data_user_booking.groupby(['HOTEL_SN']).size().to_frame('total_booking_hotel').reset_index()
     group_hotel_booking = group_hotel_booking.sort_values(by=['total_booking_hotel'], ascending=False)
-    # group_hotel_booking = group_hotel_booking[group_hotel_booking['total_booking_hotel'] > 50]
-
     data_hotel = group_hotel_booking.merge(lst_hotel, how = 'left', left_on='HOTEL_SN', right_on='SN', suffixes=('', '_delme'))
     # Discard the columns that acquired a suffix
     data_hotel = data_hotel[[c for c in data_hotel.columns if not c.endswith('_delme')]]
@@ -221,75 +211,10 @@ def get_average_price(room_type, lst_hotel_hourly):
     lst_hotel_hourly_2 = lst_hotel_hourly_2[[c for c in lst_hotel_hourly_2.columns if not c.endswith('_delme')]]    
     
     return lst_hotel_hourly_2   
-   
 
-def hotel_distribution(lst_hotel, export = False):
-    # carto-positron , stamen-terrain
-    fig = px.density_mapbox(lst_hotel, lat='LATITUDE', lon='LONGITUDE', radius=3,center=dict(lat=16, lon=106), \
-        zoom=5,mapbox_style="carto-positron", width= 1000, height=900, hover_name = "NAME", \
-            hover_data ={'LATITUDE':False # remove from hover data
-                                         ,'LONGITUDE':False # remove from hover data
-                                        })
-    fig.show()
-    if export:
-        fig.write_html("heapmap - distribution hotels - zoom to detail.html")
-      
         
 def hotel_clustering(df, k = 4, max_iter = 1000):
     # finding the clusters based on input matrix "x"
     model = KMeans(n_clusters = k, init = "k-means++", max_iter = max_iter, n_init = 10, random_state = 0)
     y_clusters = model.fit_predict(df)
     return model, y_clusters        
-
-
-
-def get_hotel_price(data_room_type):
-    """
-    return: dataframe hotel avg_price by booking type (PRICE_ONE_DAY, PRICE_OVERNIGHT, PRICE_PER_HOUR)
-    """
-    try:
-        g_room_type = data_room_type.groupby(['HOTEL_SN','FIRST_HOURS', 'PRICE_FIRST_HOURS', \
-                            'PRICE_ADDITIONAL_HOURS', 'PRICE_OVERNIGHT', 'PRICE_ONE_DAY'])['HOTEL_SN'].count().to_frame('num_of_room_hotel')
-        #                     .filter(lambda x: df['HOTEL_SN'].count()> 1)#agg({'SN':sum}) #['FIRST_HOURS']
-
-        df_room_type = pd.DataFrame(g_room_type).reset_index()
-        df_room_type = df_room_type.set_index(df_room_type['HOTEL_SN'])
-        df_room_type['PRICE_PER_HOUR'] = df_room_type.apply(lambda row: row['PRICE_FIRST_HOURS']/row['FIRST_HOURS'], axis=1)
-        df_room_type.sort_values(by='FIRST_HOURS', ascending=True)
-        df_room_type= df_room_type.query('PRICE_PER_HOUR > 10000 & PRICE_ONE_DAY > 50000 & PRICE_OVERNIGHT> 50000 & FIRST_HOURS > 0')
-
-        Data = {'x': df_room_type['PRICE_ONE_DAY'],
-                'y': df_room_type['PRICE_OVERNIGHT'],
-                'z': df_room_type['PRICE_PER_HOUR']
-               }
-
-        df = pd.DataFrame(Data,columns=['x','y', 'z'])
-        df = df.groupby(['HOTEL_SN']).agg({'x': 'mean', 'y': 'mean', 'z': 'mean'})
-        df = remove_noise_by_percentile(df, 5, 95, lst_col=['x']).dropna()    
-        return df
-    except Exception as ex:
-        logger.exception(ex)
-        return None
-
-
-def agv_price(row):
-    if row['FIRST_HOURS'] == 1:
-        return row['PRICE_FIRST_HOURS']
-    elif row['ADDITIONAL_HOURS'] == 1:
-        tmp = row['PRICE_FIRST_HOURS'] -  ((row['FIRST_HOURS'] -1) * row['PRICE_ADDITIONAL_HOURS'])
-        return tmp
-    else:
-        return 0
-    
-def preprocess_room_type_history(data_room_type_history, data_hotel, province, district): #data_room_type_history, recommender.data_hotel
-    df = data_room_type_history.merge(data_hotel.loc[:, ['SN', 'NAME', 'PROVINCE_SN', 'DISTRICT_SN', 'LATITUDE', 'LONGITUDE']], how = 'left', left_on='HOTEL_SN', right_on ='SN', suffixes = ('', '_hotel'))
-    df = df.merge(province.loc[:, ['SN', 'NAME']], how = 'left', left_on='PROVINCE_SN', right_on ='SN', suffixes = ('', '_province'))
-    df = df.merge(district.loc[:, ['SN', 'NAME']], how = 'left', left_on='DISTRICT_SN', right_on ='SN', suffixes = ('', '_district'))
-    df['DATE_CHANGE'] = df['CREATE_TIME'].apply(lambda x: str(x)[:10])
-    df = df.query('PRICE_ONE_DAY > 50000 & PRICE_OVERNIGHT> 50000 & PRICE_FIRST_HOURS> 20000 & \
-    PRICE_FIRST_HOURS< 5000000 & PRICE_ADDITIONAL_HOURS < 1000000')
-    df = df.dropna(subset=['PROVINCE_SN', 'DISTRICT_SN'])
-    df = df.query('DISTRICT_SN != 121')
-    df = df.query('HOTEL_SN not in [467]')
-    df['PRICE_FIRST_HOURS'] = df.apply(agv_price, axis=1) # calculate avg price each hotel (hourly booking)
-    return df
