@@ -1,0 +1,9 @@
+*.ipynb
+*.md
+./*.csv
+.vscode
+test
+./data/go2joy
+./data/*.csv
+./data/images
+docs

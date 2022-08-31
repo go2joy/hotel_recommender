@@ -1,0 +1,19 @@
+
+*.bak
+*.pyc
+__pycache__
+
+.local
+.cache
+.DS_Store
+.eggs
+.env
+.vscode
+.ipynb_checkpoints
+# Test data
+testCSV.csv
+docker/requirements-local.txt
+
+cache/
+
+df_recommender.csv
