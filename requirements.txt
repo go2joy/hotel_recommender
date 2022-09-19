@@ -73,3 +73,5 @@ apscheduler
 scipy==1.8.0
 openpyxl
 pmdarima
+pytables
+memory_profiler

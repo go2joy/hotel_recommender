@@ -1,7 +1,6 @@
 from email import message
 from os.path import dirname, join, realpath, isfile
 import sys
-from pandas import DataFrame
 C_DIR = dirname(realpath(__file__))
 P_DIR = dirname(C_DIR)
 sys.path.insert(0, P_DIR)
@@ -34,7 +33,7 @@ from api.auth import *
 from fastapi_utils.tasks import repeat_every
 import datetime
 from db.database import MyDatabase
-from go2joy import HotelRecommender
+from recommender import HotelRecommender
 
 app_desc = """<h2>GO2JOY</h2>
 """

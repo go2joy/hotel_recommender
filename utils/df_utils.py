@@ -1,5 +1,7 @@
 
 #!pip install pycountry
+import os
+os.environ["MODIN_ENGINE"] = "dask" 
 import sys
 from os.path import dirname, join, realpath
 C_DIR = dirname(realpath(__file__))
@@ -9,9 +11,12 @@ sys.path.insert(0,P_DIR)
 
 import numpy as np
 import pandas as pd
-import pandas
+# Importing dask dataframe
+# import dask
+# import dask.dataframe as pd
+
 # import ray
-# ray.init(num_cpus=6, ignore_reinit_error=True)
+# ray.init(num_cpus=4, ignore_reinit_error=True)
 # import modin.pandas as pd  #pip install modin[ray]
 
 import matplotlib.pyplot as plt
@@ -31,9 +36,9 @@ import plotly.graph_objs as go
 from plotly import tools
 from plotly.subplots import make_subplots
 import plotly.express as px
+import datetime
 
-
-def get_data():
+def get_data(n_samples = 1000):
     db = MyDatabase()
     results = []
     for query in lst_query:
@@ -42,6 +47,8 @@ def get_data():
         results.append(data)
         
     user_booking = results[0]
+    if n_samples> 0:
+        user_booking = user_booking[-n_samples:]
     data_hotel = results[1]
     return user_booking, data_hotel
 
@@ -130,7 +137,7 @@ def remove_noise_by_percentile(df, q_min, q_max, lst_col=['waiting_time']):
 
 
 def get_data_user_booking(user_booking, lst_hotel, booking_type = [1, 2, 3], booking_status = [0, 1, 2, 3,4,5]):
-    user_booking = user_booking.loc[(user_booking['CREATE_TIME'] >= '2020-01-01')]
+    # user_booking = user_booking.loc[(user_booking['CREATE_TIME'] >= '2020-01-01')]
     # tbs_user_booking = user_booking.merge(v_hotel_setting, how = 'left', left_on='HOTEL_SN', right_on='HOTEL_SN')
     tbs_user_booking = user_booking.query('TYPE in @booking_type and BOOKING_STATUS in @booking_status')
     tbs_user_booking = split_booking_time(tbs_user_booking)
@@ -143,6 +150,7 @@ def get_data_user_booking(user_booking, lst_hotel, booking_type = [1, 2, 3], boo
     tbs_user_booking = tbs_user_booking[[c for c in tbs_user_booking.columns if not c.endswith('_delme')]]
 
     tbs_user_booking = split_datetime(tbs_user_booking)
+    tbs_user_booking = tbs_user_booking.dropna(how='any', subset=['APP_USER_SN'])
     return tbs_user_booking
 
 
@@ -182,13 +190,13 @@ def scale_df(df):
     return df_normalized
 
 
-def calculate_distance(latitude1 = 21.012758, longitude1 = 105.800766, latitude2 = 21.010260, longitude2=105.865092):
+def calculate_distance(lon1 = 105.800766, lat1 = 21.012758, lon2=105.865092, lat2 = 21.010260):
     # approximate radius of earth in km
     R = 6373.0
-    lat1 = radians(latitude1)
-    lon1 = radians(longitude1)
-    lat2 = radians(latitude2)
-    lon2 = radians(longitude2)
+    lat1 = radians(lat1)
+    lon1 = radians(lon1)
+    lat2 = radians(lat2)
+    lon2 = radians(lon2)
 
     dlon = lon2 - lon1
     dlat = lat2 - lat1

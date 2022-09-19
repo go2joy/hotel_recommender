@@ -2,9 +2,19 @@
 #   Last Update: 11/05/2021
 #
 
-
+from itertools import chain
+from functools import reduce
+from socket import gethostname
+from joblib import Parallel, delayed
+from multiprocessing import cpu_count
+from contextlib import redirect_stdout
+from timeit import default_timer as timer
+from multiprocessing.pool import ThreadPool
 from os.path import dirname, join, realpath, isfile
 import sys
+from typing import Callable
+
+
 
 C_DIR = dirname(realpath(__file__))
 P_DIR = dirname(C_DIR)
@@ -54,3 +64,15 @@ def timeit(method):
     return timed
 
 
+def parallel(func=None, args=(), merge_func=lambda x:x, parallelism = cpu_count()):
+    def decorator(func: Callable):
+        def inner(*args, **kwargs):
+            results = Parallel(n_jobs=parallelism)(delayed(func)(*args, **kwargs) for i in range(parallelism))
+            return merge_func(results)
+        return inner
+    if func is None:
+        # decorator was used like @parallel(...)
+        return decorator
+    else:
+        # decorator was used like @parallel, without parens
+        return decorator(func)

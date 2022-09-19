@@ -1,4 +1,5 @@
-import re
+import os
+os.environ["MODIN_ENGINE"] = "dask" 
 import json 
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, Text, DateTime
@@ -6,11 +7,15 @@ import sqlalchemy
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
-import pandas as pd
+
+# Importing dask dataframe
+# import dask
+# import dask.dataframe as pd
 # import ray
 # ray.init(num_cpus=6, ignore_reinit_error=True)
 # import modin.pandas as pd  #pip install modin[ray]
 
+import pandas as pd
 import urllib.parse
 urllib.parse.quote_plus("Mysql@12345!")
 

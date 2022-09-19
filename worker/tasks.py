@@ -22,7 +22,7 @@ from celery.exceptions import Ignore, MaxRetriesExceededError
 from .app_worker import celery_app
 # import extractor
 # from extractor import Extractor, detect_table, is_box_null
-from go2joy import HotelRecommender
+from recommender import HotelRecommender
 from utils.util import exception_logger
 
 logger = exception_logger("worker", join(P_DIR, "./logs/{}_workers.log".format(os.environ.get('WORKERNAME', 'default'))))

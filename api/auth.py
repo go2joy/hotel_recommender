@@ -9,7 +9,9 @@ from pydantic import BaseModel
 
 # to get a string like this run:
 # openssl rand -hex 32
-SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
+# SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7" # first
+SECRET_KEY = "pc36LXfFo0FVbDcH09R1oQU5qZlj4adqRWUfIvgN6ReAbN8r31rb7VPrXGZ7dE3Q"
+
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60*24*365 #minutes
 
@@ -119,7 +121,17 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
 
 
 
-# if __name__=="__main__":
-#     password = "P@ssword"
-#     h = get_password_hash(password)
-#     print(h)
+if __name__=="__main__":
+    password = "P@ssword"
+    h = get_password_hash(password)
+    print(h)
+    data = {"go2joy": {
+        "username": "go2joy",
+        "full_name": "Backend",
+        "email": "anh.tuan@go2joy.vn",
+        "hashed_password": '$2b$12$Ifupm3nrp552LHll4E.U5e.xPdzlJYhBS3JdYQdfw/F3.E/TycIj6',
+        "disabled": False,
+    }
+    }
+    token = create_access_token(data)
+    print(token)
