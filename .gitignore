@@ -10,11 +10,5 @@ __pycache__
 .env
 .vscode
 .ipynb_checkpoints
-# Test data
-testCSV.csv
-docker/requirements-local.txt
 
-cache/
-dask-worker-space
 
-df_recommender.csv
