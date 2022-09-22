@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 import imp
+import numbers
 import re
 import sys
 import os
@@ -38,7 +39,7 @@ from utils.df_utils import *
 from utils.util import logger, timeit, parallel
 from utils.apriori import Apriori
 from db.database import MyDatabase
-from db.sql_query import get_app_user, get_booking, get_hotel, get_lst_hotel, get_user_booking
+from db.sql_query import get_app_user, get_hotel, get_user_booking
 
 import time
 from sklearn.neighbors import DistanceMetric
@@ -48,6 +49,7 @@ from sklearn.cluster import KMeans, DBSCAN
 from math import radians
 import plotly.express as px
 from pandas.io.pytables import *
+from efficient_apriori import apriori
 
 from memory_profiler import profile
 
@@ -70,11 +72,13 @@ class HotelRecommender():
         except Exception as ex:
             logger.warning(ex)
         self.apriori = None
-        self.user_booking, self.data_hotel = get_data(n_samples)
+        # self.user_booking, self.data_hotel = get_data(n_samples)
+        self.user_booking, self.data_hotel = read_data_from_file()
+
         logger.info("get data successful...")                     
         self.lst_hotel= clean_data(self.data_hotel)
         self.data_user_booking = get_data_user_booking(self.user_booking,self.lst_hotel, \
-            booking_type = [1, 2], booking_status = [2])      #booking_type= [1, 2, 3], booking_status = [0, 1, 2, 3,4,5]   
+            booking_type = [1, 2, 3], booking_status = [2])      #booking_type= [1, 2, 3], booking_status = [0, 1, 2, 3,4,5]   
 
         self.dis_matrix = self.build_distance_metric()
         
@@ -87,8 +91,10 @@ class HotelRecommender():
                 total_booked= ('SN', 'count'), \
                 booked_users = ('APP_USER_SN', lambda x: [int(v) for v in x])).reset_index()
                 
-        self.assoc_rule = self.run_apriori(self.user_lst_hotel)
+        # self.assoc_rule = self.run_apriori()
+        self.assoc_rule = self.run_apriori_v2()
         
+
         self.model = dict()        
         logger.info("init model...")
 
@@ -102,7 +108,9 @@ class HotelRecommender():
 
     @timeit
     def get_hotels_of_user(self, lst_user_sn):
-        try: 
+        if isinstance(lst_user_sn, (int, float)):
+            lst_user_sn = [lst_user_sn]
+        try:
             lst_hotel = self.user_lst_hotel.query('APP_USER_SN in @lst_user_sn')['booked_hotels'].values.tolist()
             lst_hotel = [item for sublist in lst_hotel for item in sublist]
             return list(set(sorted(lst_hotel, key = lst_hotel.count, reverse = True)))
@@ -150,6 +158,8 @@ class HotelRecommender():
     @timeit
     def get_users_in_hotel(self, lst_hotel_sn):
         try:
+            if isinstance(lst_hotel_sn, (int, float)):
+                lst_hotel_sn = [lst_hotel_sn]
             lst_user = self.hotel_lst_user.query('HOTEL_SN in @lst_hotel_sn')['booked_users'].values.tolist()[0]
             return sorted(lst_user, key = lst_user.count, reverse = True)
         except Exception as ex:
@@ -210,7 +220,7 @@ class HotelRecommender():
         lst_res = []
         lst_user = []
         df_median = None
-        hotels_of_user = self.get_hotels_of_user([user_sn])
+        hotels_of_user = self.get_hotels_of_user(user_sn)
         df_hotels = self.data_hotel.query('SN in @hotels_of_user')[['LONGITUDE', 'LATITUDE']]
         
         if df_hotels.shape[0] > 3:
@@ -238,6 +248,18 @@ class HotelRecommender():
                     lst_res.append(hotel_sn)
                     continue
         return lst_res #self.get_hotels_of_user(lst_user)
+
+
+    def predict_v2(self, lst_user):
+        hotels_of_user = self.get_hotels_of_user(lst_user)
+        df_hotels_user = self.data_hotel.query('SN in @hotels_of_user')[['SN', 'LONGITUDE', 'LATITUDE', 'NAME']]
+        # df_hotels_user['CLUSTER_HDBSCAN'] = 0
+
+        hotel_recommend = self.get_results_powerset(hotels_of_user)
+        df_hotels_recommend = self.data_hotel.query('SN in @hotel_recommend')[['SN','LONGITUDE', 'LATITUDE', 'NAME']]
+        # df_hotels_recommend['CLUSTER_HDBSCAN'] = 1
+        # df = pd.concat([df_hotels_user, df_hotels_recommend], axis=0)
+        return df_hotels_recommend    
 
 
     def pivot_segment(self, segmentNumber, segmentSize,passedFrame):
@@ -302,16 +324,17 @@ class HotelRecommender():
     def get_results_powerset(self, list_hotel):   
     #     list_cate = list(set(map(lambda x: int(x), list_product.split())))
         recommend = []
-        for item_set in reduce(lambda result, x: result + [subset + [x] for subset in result], list_hotel, [[]]): #, [[]]
+
+        for item_set in reduce(lambda result, x: result + [subset + [x] for subset in result], list_hotel[:7], [[]]): #, [[]]
             for index, row in self.assoc_rule.iterrows():
                 if set(item_set) == set(row.A):
                     recommend.extend(row.B)
         return recommend
 
     # @parallel(merge_func=lambda li: sorted(set(chain(*li))))
-    def run_apriori(self, user_lst_hotel):
+    def run_apriori(self,):
         self.apriori = Apriori(0.0005, 0.1)  
-        inFile = self.apriori.dataFromDataFrame(user_lst_hotel)
+        inFile = self.apriori.dataFromDataFrame(self.user_lst_hotel)
         items, rules = self.apriori.runApriori(inFile, self.apriori.minSupport, self.apriori.minConfidence)
         self.apriori.saveResults(items, rules)
         
@@ -326,14 +349,27 @@ class HotelRecommender():
         df_rule.to_csv("association_rules.csv", index=False)
         return df_rule
 
+    def run_apriori_v2(self,):
+        transactions = [set(transaction) for transaction in self.user_lst_hotel.query('count_unique_hotel > 1')['booked_hotels']]
+        itemsets, rules = apriori(transactions, min_support=0.001, min_confidence=0.2)
+        lst = []
+        for rule in sorted(rules, key=lambda rule: rule.lift, reverse=True):
+            lst.append([list(rule.lhs), list(rule.rhs), rule.lift])
+        df_rule = pd.DataFrame(lst)
+        df_rule.columns = ['A', 'B', 'lift']
+        df_rule.to_csv("association_rules_v2.csv", index=False)
+        return df_rule
+
+    
+
 
 if __name__=="__main__":
 
     recommender = HotelRecommender(n_samples=-1)
     # recommender.build_model()
-    # res = recommender.predict(172015) #
-    list_product = [830, 2812, 1462]
-    res = recommender.get_results_powerset(list_product)
+    # res = recommender.predict(172015)
+    res = recommender.predict_v2(172015) #
+
     print(res)
     logger.info(res)
 

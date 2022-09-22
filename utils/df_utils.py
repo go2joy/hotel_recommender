@@ -1,5 +1,6 @@
 
 #!pip install pycountry
+from operator import index
 import os
 os.environ["MODIN_ENGINE"] = "dask" 
 import sys
@@ -38,6 +39,8 @@ from plotly.subplots import make_subplots
 import plotly.express as px
 import datetime
 
+data_path = join(P_DIR, 'data')
+
 def get_data(n_samples = 1000):
     db = MyDatabase()
     results = []
@@ -50,6 +53,8 @@ def get_data(n_samples = 1000):
     if n_samples> 0:
         user_booking = user_booking[-n_samples:]
     data_hotel = results[1]
+    user_booking.to_csv("user_booking.csv", index=False)
+    data_hotel.to_csv("data_hotel.csv", index=False)
     return user_booking, data_hotel
 
 
@@ -140,16 +145,13 @@ def get_data_user_booking(user_booking, lst_hotel, booking_type = [1, 2, 3], boo
     # user_booking = user_booking.loc[(user_booking['CREATE_TIME'] >= '2020-01-01')]
     # tbs_user_booking = user_booking.merge(v_hotel_setting, how = 'left', left_on='HOTEL_SN', right_on='HOTEL_SN')
     tbs_user_booking = user_booking.query('TYPE in @booking_type and BOOKING_STATUS in @booking_status')
-    tbs_user_booking = split_booking_time(tbs_user_booking)
+    # tbs_user_booking = split_booking_time(tbs_user_booking)
 
-    tbs_user_booking = tbs_user_booking[(tbs_user_booking["HOTEL_SN"]!=467)]
-
-    tbs_user_booking = tbs_user_booking.dropna(how = 'any', subset=['b_time'])
-    tbs_user_booking = tbs_user_booking.merge(lst_hotel, how = 'left', left_on='HOTEL_SN', right_on='SN', suffixes=('', '_HOTEL'))
-
-    tbs_user_booking = tbs_user_booking[[c for c in tbs_user_booking.columns if not c.endswith('_delme')]]
-
-    tbs_user_booking = split_datetime(tbs_user_booking)
+    # tbs_user_booking = tbs_user_booking[(tbs_user_booking["HOTEL_SN"]!=467)]
+    # tbs_user_booking = tbs_user_booking.dropna(how = 'any', subset=['b_time'])
+    # tbs_user_booking = tbs_user_booking.merge(lst_hotel, how = 'left', left_on='HOTEL_SN', right_on='SN', suffixes=('', '_HOTEL'))
+    # tbs_user_booking = tbs_user_booking[[c for c in tbs_user_booking.columns if not c.endswith('_delme')]]
+    # tbs_user_booking = split_datetime(tbs_user_booking)
     tbs_user_booking = tbs_user_booking.dropna(how='any', subset=['APP_USER_SN'])
     return tbs_user_booking
 
@@ -226,3 +228,10 @@ def hotel_clustering(df, k = 4, max_iter = 1000):
     model = KMeans(n_clusters = k, init = "k-means++", max_iter = max_iter, n_init = 10, random_state = 0)
     y_clusters = model.fit_predict(df)
     return model, y_clusters        
+
+
+def read_data_from_file():
+    user_booking = pd.read_csv(join(data_path,'user_booking.csv'), low_memory=False)
+    data_hotel = pd.read_csv(join(data_path,'data_hotel.csv'), low_memory=False)
+    
+    return user_booking, data_hotel

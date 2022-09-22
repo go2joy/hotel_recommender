@@ -89,20 +89,14 @@ class Apriori:
         assocRules = dict()
         # Dictionary which stores Association Rules
 
-        oneCSet = self.returnItemsWithMinSupport(itemSet,
-                                            transactionList,
-                                            minSupport,
-                                            freqSet)
+        oneCSet = self.returnItemsWithMinSupport(itemSet,transactionList, minSupport,freqSet)
 
         currentLSet = oneCSet
         k = 2
         while(currentLSet != set([])):
             largeSet[k-1] = currentLSet
             currentLSet = self.joinSet(currentLSet, k)
-            currentCSet = self.returnItemsWithMinSupport(currentLSet,
-                                                    transactionList,
-                                                    minSupport,
-                                                    freqSet)
+            currentCSet = self.returnItemsWithMinSupport(currentLSet, transactionList, minSupport,freqSet)
             currentLSet = currentCSet
             k = k + 1
 
