@@ -1,7 +1,7 @@
 # Hotel Recommender System
 
 We will perform exploratory data analysis with python to get insight from the data
-methods: 
+methods, then build hotel recommendation system: 
  -  Content based Filtering
  -  Collaborative Filtering
  -  Hybrid Filtering
