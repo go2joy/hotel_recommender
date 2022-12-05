@@ -53,8 +53,8 @@ def get_data(n_samples = 1000):
     if n_samples> 0:
         user_booking = user_booking[-n_samples:]
     data_hotel = results[1]
-    user_booking.to_csv("user_booking.csv", index=False)
-    data_hotel.to_csv("data_hotel.csv", index=False)
+    user_booking.to_csv(join(data_path, "user_booking.csv"), index=False)
+    data_hotel.to_csv(join(data_path, "data_hotel.csv"), index=False)
     return user_booking, data_hotel
 
 

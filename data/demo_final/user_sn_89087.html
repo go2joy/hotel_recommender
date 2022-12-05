@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_6ccb9d93680e1e830c34a15d9659284d {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_6ccb9d93680e1e830c34a15d9659284d" ></div>
+        
+</body>
+<script>    
+    
+            var map_6ccb9d93680e1e830c34a15d9659284d = L.map(
+                "map_6ccb9d93680e1e830c34a15d9659284d",
+                {
+                    center: [21.011084, 105.86336412500003],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 9,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_966d6bc78f04dfac0a4e577ae7845474 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_6ccb9d93680e1e830c34a15d9659284d);
+        
+    
+            var circle_marker_a8d09281b124debefe538c1882a2902c = L.circleMarker(
+                [21.005242, 105.86204199999996],
+                {"bubblingMouseEvents": true, "color": "#e6194b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e6194b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6ccb9d93680e1e830c34a15d9659284d);
+        
+    
+        var popup_6e279063648aa85f7d79eee928669705 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_75f8f53ee0a323082d57e53ed93e24ad = $(`<div id="html_75f8f53ee0a323082d57e53ed93e24ad" style="width: 100.0%; height: 100.0%;">0 - 909 - GOLDEN HOTEL</div>`)[0];
+            popup_6e279063648aa85f7d79eee928669705.setContent(html_75f8f53ee0a323082d57e53ed93e24ad);
+        
+
+        circle_marker_a8d09281b124debefe538c1882a2902c.bindPopup(popup_6e279063648aa85f7d79eee928669705)
+        ;
+
+        
+    
+    
+            var circle_marker_9e0acc00e3f32e080ed519ba5ba82ee5 = L.circleMarker(
+                [21.0144169, 105.86316110000008],
+                {"bubblingMouseEvents": true, "color": "#ffe119", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffe119", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6ccb9d93680e1e830c34a15d9659284d);
+        
+    
+        var popup_45a446421e1da4b27832940427184652 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3c8057cf508eafc08c37b95e192f0c3f = $(`<div id="html_3c8057cf508eafc08c37b95e192f0c3f" style="width: 100.0%; height: 100.0%;">2 - 1190 - GOLDEN HOTEL II</div>`)[0];
+            popup_45a446421e1da4b27832940427184652.setContent(html_3c8057cf508eafc08c37b95e192f0c3f);
+        
+
+        circle_marker_9e0acc00e3f32e080ed519ba5ba82ee5.bindPopup(popup_45a446421e1da4b27832940427184652)
+        ;
+
+        
+    
+    
+            var circle_marker_ff03f83c8eba36bc17a5542e7645c468 = L.circleMarker(
+                [21.0102602, 105.8650923],
+                {"bubblingMouseEvents": true, "color": "#3cb44b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3cb44b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6ccb9d93680e1e830c34a15d9659284d);
+        
+    
+        var popup_497241c9313cff251811a77e2302d98e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_8043387111be44570ba55a3f95380711 = $(`<div id="html_8043387111be44570ba55a3f95380711" style="width: 100.0%; height: 100.0%;">1 - 648 - LE GRAND HANOI HOTEL</div>`)[0];
+            popup_497241c9313cff251811a77e2302d98e.setContent(html_8043387111be44570ba55a3f95380711);
+        
+
+        circle_marker_ff03f83c8eba36bc17a5542e7645c468.bindPopup(popup_497241c9313cff251811a77e2302d98e)
+        ;
+
+        
+    
+    
+            var circle_marker_65032fa9a5cd71e0e364a6e4b8e471e4 = L.circleMarker(
+                [21.0144169, 105.86316110000008],
+                {"bubblingMouseEvents": true, "color": "#ffe119", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffe119", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_6ccb9d93680e1e830c34a15d9659284d);
+        
+    
+        var popup_17bb5bfa0b960bc4c31b66c2d61b3fa1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_2496e0bbce89fc658a28d5a5df31480c = $(`<div id="html_2496e0bbce89fc658a28d5a5df31480c" style="width: 100.0%; height: 100.0%;">2 - 1190 - GOLDEN HOTEL II</div>`)[0];
+            popup_17bb5bfa0b960bc4c31b66c2d61b3fa1.setContent(html_2496e0bbce89fc658a28d5a5df31480c);
+        
+
+        circle_marker_65032fa9a5cd71e0e364a6e4b8e471e4.bindPopup(popup_17bb5bfa0b960bc4c31b66c2d61b3fa1)
+        ;
+
+        
+    
+</script>

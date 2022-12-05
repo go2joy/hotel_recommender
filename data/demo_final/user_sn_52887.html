@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_fe67f9200519114886fd67228560d73c {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_fe67f9200519114886fd67228560d73c" ></div>
+        
+</body>
+<script>    
+    
+            var map_fe67f9200519114886fd67228560d73c = L.map(
+                "map_fe67f9200519114886fd67228560d73c",
+                {
+                    center: [10.754105544444446, 106.68370936666665],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 9,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_67c1332a9292c238a60d4956e81a745e = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_fe67f9200519114886fd67228560d73c);
+        
+    
+            var circle_marker_2d00b10a4368b4cf9f293fe33337e28a = L.circleMarker(
+                [10.7366588, 106.69038030000002],
+                {"bubblingMouseEvents": true, "color": "#e6194b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e6194b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_fe67f9200519114886fd67228560d73c);
+        
+    
+        var popup_d674a7f07e8279ce209448175090f14f = L.popup({"maxWidth": "100%"});
+
+        
+            var html_5cca973ac0d236e7d20c659bc8afaae0 = $(`<div id="html_5cca973ac0d236e7d20c659bc8afaae0" style="width: 100.0%; height: 100.0%;">0 - 485 - MINH NGỌC HOTEL</div>`)[0];
+            popup_d674a7f07e8279ce209448175090f14f.setContent(html_5cca973ac0d236e7d20c659bc8afaae0);
+        
+
+        circle_marker_2d00b10a4368b4cf9f293fe33337e28a.bindPopup(popup_d674a7f07e8279ce209448175090f14f)
+        ;
+
+        
+    
+    
+            var circle_marker_16ccead7dfd30e726d386c1a32d3abd9 = L.circleMarker(
+                [10.7597549, 106.6723558],
+                {"bubblingMouseEvents": true, "color": "#e6194b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e6194b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_fe67f9200519114886fd67228560d73c);
+        
+    
+        var popup_307a6c9c2af413aaf6d96da26453cd81 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_690c0546933efea3c86378e487ad2733 = $(`<div id="html_690c0546933efea3c86378e487ad2733" style="width: 100.0%; height: 100.0%;">0 - 730 - BONITA HÙNG VƯƠNG</div>`)[0];
+            popup_307a6c9c2af413aaf6d96da26453cd81.setContent(html_690c0546933efea3c86378e487ad2733);
+        
+
+        circle_marker_16ccead7dfd30e726d386c1a32d3abd9.bindPopup(popup_307a6c9c2af413aaf6d96da26453cd81)
+        ;
+
+        
+    
+    
+            var circle_marker_1e9889a0f774ebea2e894198c35b4d4a = L.circleMarker(
+                [10.7714898, 106.6964038],
+                {"bubblingMouseEvents": true, "color": "#e6194b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e6194b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_fe67f9200519114886fd67228560d73c);
+        
+    
+        var popup_a5264b6a95f9bc9feed29c2ab33fea9b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_9b688ce719321984d6e7515c21fe9b8a = $(`<div id="html_9b688ce719321984d6e7515c21fe9b8a" style="width: 100.0%; height: 100.0%;">0 - 1141 - CABANA HOTEL SAIGON</div>`)[0];
+            popup_a5264b6a95f9bc9feed29c2ab33fea9b.setContent(html_9b688ce719321984d6e7515c21fe9b8a);
+        
+
+        circle_marker_1e9889a0f774ebea2e894198c35b4d4a.bindPopup(popup_a5264b6a95f9bc9feed29c2ab33fea9b)
+        ;
+
+        
+    
+    
+            var circle_marker_97c5e0f895e3a11d816ec861f40b2796 = L.circleMarker(
+                [10.7778196, 106.6661489],
+                {"bubblingMouseEvents": true, "color": "#e6194b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e6194b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_fe67f9200519114886fd67228560d73c);
+        
+    
+        var popup_3e54086e2c11a42bab7e26d834617217 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d143f91c615114ed7f6f9e740d48c866 = $(`<div id="html_d143f91c615114ed7f6f9e740d48c866" style="width: 100.0%; height: 100.0%;">0 - 3009 - MIMOSA HOTEL QUẬN 10</div>`)[0];
+            popup_3e54086e2c11a42bab7e26d834617217.setContent(html_d143f91c615114ed7f6f9e740d48c866);
+        
+
+        circle_marker_97c5e0f895e3a11d816ec861f40b2796.bindPopup(popup_3e54086e2c11a42bab7e26d834617217)
+        ;
+
+        
+    
+    
+            var circle_marker_489a64aa47f9fc0458f12bedb9fe5481 = L.circleMarker(
+                [10.7373706, 106.688904],
+                {"bubblingMouseEvents": true, "color": "#e6194b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e6194b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_fe67f9200519114886fd67228560d73c);
+        
+    
+        var popup_a33dd49c82facffd092f527ab11168d8 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_5595567017eb748dd1557f00439529be = $(`<div id="html_5595567017eb748dd1557f00439529be" style="width: 100.0%; height: 100.0%;">0 - 3217 - ROYAL HOTEL</div>`)[0];
+            popup_a33dd49c82facffd092f527ab11168d8.setContent(html_5595567017eb748dd1557f00439529be);
+        
+
+        circle_marker_489a64aa47f9fc0458f12bedb9fe5481.bindPopup(popup_a33dd49c82facffd092f527ab11168d8)
+        ;
+
+        
+    
+    
+            var circle_marker_6f730178acfe267819efe65bb2322ce7 = L.circleMarker(
+                [10.7368882, 106.68904279999992],
+                {"bubblingMouseEvents": true, "color": "#3cb44b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3cb44b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_fe67f9200519114886fd67228560d73c);
+        
+    
+        var popup_301742677b584d076a1b1910ddb40b40 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a15152d9af09a516aa88312245be12e1 = $(`<div id="html_a15152d9af09a516aa88312245be12e1" style="width: 100.0%; height: 100.0%;">1 - 1058 - ROSE HOTEL</div>`)[0];
+            popup_301742677b584d076a1b1910ddb40b40.setContent(html_a15152d9af09a516aa88312245be12e1);
+        
+
+        circle_marker_6f730178acfe267819efe65bb2322ce7.bindPopup(popup_301742677b584d076a1b1910ddb40b40)
+        ;
+
+        
+    
+    
+            var circle_marker_0faa4bac382a67c47f8e472232bd9d90 = L.circleMarker(
+                [10.772469, 106.69460200000005],
+                {"bubblingMouseEvents": true, "color": "#3cb44b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3cb44b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_fe67f9200519114886fd67228560d73c);
+        
+    
+        var popup_16a3c8bc583ee72f770ba9b5e403fa92 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_786607ec4161460065ee8223182570b0 = $(`<div id="html_786607ec4161460065ee8223182570b0" style="width: 100.0%; height: 100.0%;">1 - 1185 - THE ONE HOTEL BEN THANH</div>`)[0];
+            popup_16a3c8bc583ee72f770ba9b5e403fa92.setContent(html_786607ec4161460065ee8223182570b0);
+        
+
+        circle_marker_0faa4bac382a67c47f8e472232bd9d90.bindPopup(popup_16a3c8bc583ee72f770ba9b5e403fa92)
+        ;
+
+        
+    
+    
+            var circle_marker_53e23bb544c705f863addce9a28a7eeb = L.circleMarker(
+                [10.733806, 106.6900303],
+                {"bubblingMouseEvents": true, "color": "#3cb44b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3cb44b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_fe67f9200519114886fd67228560d73c);
+        
+    
+        var popup_3278896cd61b38f2286be77610b186d2 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ec1302c5ba3bd533ca33b02f8a0d6044 = $(`<div id="html_ec1302c5ba3bd533ca33b02f8a0d6044" style="width: 100.0%; height: 100.0%;">1 - 2218 - ELLY HOTEL</div>`)[0];
+            popup_3278896cd61b38f2286be77610b186d2.setContent(html_ec1302c5ba3bd533ca33b02f8a0d6044);
+        
+
+        circle_marker_53e23bb544c705f863addce9a28a7eeb.bindPopup(popup_3278896cd61b38f2286be77610b186d2)
+        ;
+
+        
+    
+    
+            var circle_marker_2ff17ffb3b7ddabece729c883771ad41 = L.circleMarker(
+                [10.760693, 106.6655164],
+                {"bubblingMouseEvents": true, "color": "#3cb44b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3cb44b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_fe67f9200519114886fd67228560d73c);
+        
+    
+        var popup_f5f6e1f6c3e00e5b84040c11e8651ea9 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4ad2cdec37b9e5aebef65d8f3d62988c = $(`<div id="html_4ad2cdec37b9e5aebef65d8f3d62988c" style="width: 100.0%; height: 100.0%;">1 - 4118 - LÁ HOTEL QUẬN 10</div>`)[0];
+            popup_f5f6e1f6c3e00e5b84040c11e8651ea9.setContent(html_4ad2cdec37b9e5aebef65d8f3d62988c);
+        
+
+        circle_marker_2ff17ffb3b7ddabece729c883771ad41.bindPopup(popup_f5f6e1f6c3e00e5b84040c11e8651ea9)
+        ;
+
+        
+    
+</script>

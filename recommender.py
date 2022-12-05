@@ -72,8 +72,8 @@ class HotelRecommender():
         except Exception as ex:
             logger.warning(ex)
         self.apriori = None
-        # self.user_booking, self.data_hotel = get_data(n_samples)
-        self.user_booking, self.data_hotel = read_data_from_file()
+        self.user_booking, self.data_hotel = get_data(n_samples=-1)
+        # self.user_booking, self.data_hotel = read_data_from_file()
 
         logger.info("get data successful...")                     
         self.lst_hotel= clean_data(self.data_hotel)

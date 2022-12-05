@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_18f2e9d8cda469c493c014ac479f8a1d {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_18f2e9d8cda469c493c014ac479f8a1d" ></div>
+        
+</body>
+<script>    
+    
+            var map_18f2e9d8cda469c493c014ac479f8a1d = L.map(
+                "map_18f2e9d8cda469c493c014ac479f8a1d",
+                {
+                    center: [10.767920790909091, 106.69546343636362],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 9,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_14de34e3267d2b7448db79be5eca9e8c = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_18f2e9d8cda469c493c014ac479f8a1d);
+        
+    
+            var circle_marker_d920efd595a0c16beebf9963480dcff3 = L.circleMarker(
+                [10.7979658, 106.729704],
+                {"bubblingMouseEvents": true, "color": "#ffe119", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffe119", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_18f2e9d8cda469c493c014ac479f8a1d);
+        
+    
+        var popup_aac0d300d80cfbb88f161f85c88ffb5e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e26e42c0c3b25afbef2a199b55ac8559 = $(`<div id="html_e26e42c0c3b25afbef2a199b55ac8559" style="width: 100.0%; height: 100.0%;">2 - 910 - A IN HOTEL GLAMOUR</div>`)[0];
+            popup_aac0d300d80cfbb88f161f85c88ffb5e.setContent(html_e26e42c0c3b25afbef2a199b55ac8559);
+        
+
+        circle_marker_d920efd595a0c16beebf9963480dcff3.bindPopup(popup_aac0d300d80cfbb88f161f85c88ffb5e)
+        ;
+
+        
+    
+    
+            var circle_marker_7d691361ebfada4f15b23ddfeea4b9c0 = L.circleMarker(
+                [10.7367044, 106.69037890000004],
+                {"bubblingMouseEvents": true, "color": "#e6194b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e6194b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_18f2e9d8cda469c493c014ac479f8a1d);
+        
+    
+        var popup_74a9dadc8c75db051ec59c9af08a6b87 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_af9b09b8393ea042825430412dd02c9d = $(`<div id="html_af9b09b8393ea042825430412dd02c9d" style="width: 100.0%; height: 100.0%;">0 - 911 - A IN HOTEL TRUNG SƠN</div>`)[0];
+            popup_74a9dadc8c75db051ec59c9af08a6b87.setContent(html_af9b09b8393ea042825430412dd02c9d);
+        
+
+        circle_marker_7d691361ebfada4f15b23ddfeea4b9c0.bindPopup(popup_74a9dadc8c75db051ec59c9af08a6b87)
+        ;
+
+        
+    
+    
+            var circle_marker_c7fd8937e0d8406bd904f9099b729a01 = L.circleMarker(
+                [10.7648949, 106.6950513],
+                {"bubblingMouseEvents": true, "color": "#ffe119", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffe119", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_18f2e9d8cda469c493c014ac479f8a1d);
+        
+    
+        var popup_6565cac32c72a5f7e0be04699854e13d = L.popup({"maxWidth": "100%"});
+
+        
+            var html_16a072dd6d0bb70064f1ebae669c13c7 = $(`<div id="html_16a072dd6d0bb70064f1ebae669c13c7" style="width: 100.0%; height: 100.0%;">2 - 1721 - A IN HOTEL DEL LUNA</div>`)[0];
+            popup_6565cac32c72a5f7e0be04699854e13d.setContent(html_16a072dd6d0bb70064f1ebae669c13c7);
+        
+
+        circle_marker_c7fd8937e0d8406bd904f9099b729a01.bindPopup(popup_6565cac32c72a5f7e0be04699854e13d)
+        ;
+
+        
+    
+    
+            var circle_marker_995cac4b13bcca4ba3cdbfdd56cbc8be = L.circleMarker(
+                [10.7666164, 106.6740556],
+                {"bubblingMouseEvents": true, "color": "#e6194b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e6194b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_18f2e9d8cda469c493c014ac479f8a1d);
+        
+    
+        var popup_d91858c2c785252c854bf13b62299329 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_cea76bfdd72ec6914f10f04b92e28ef6 = $(`<div id="html_cea76bfdd72ec6914f10f04b92e28ef6" style="width: 100.0%; height: 100.0%;">0 - 2843 - BIỂN XANH HOTEL</div>`)[0];
+            popup_d91858c2c785252c854bf13b62299329.setContent(html_cea76bfdd72ec6914f10f04b92e28ef6);
+        
+
+        circle_marker_995cac4b13bcca4ba3cdbfdd56cbc8be.bindPopup(popup_d91858c2c785252c854bf13b62299329)
+        ;
+
+        
+    
+    
+            var circle_marker_fd8b4c498974961d95977aed12cfa51f = L.circleMarker(
+                [10.786388, 106.692876],
+                {"bubblingMouseEvents": true, "color": "#e6194b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e6194b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_18f2e9d8cda469c493c014ac479f8a1d);
+        
+    
+        var popup_f4252ec62f3178d548afd9cc249ef7f8 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_341444bea007b4d321c9dd6b64df42eb = $(`<div id="html_341444bea007b4d321c9dd6b64df42eb" style="width: 100.0%; height: 100.0%;">0 - 2933 - LÁ SIGNATURE QUẬN 3</div>`)[0];
+            popup_f4252ec62f3178d548afd9cc249ef7f8.setContent(html_341444bea007b4d321c9dd6b64df42eb);
+        
+
+        circle_marker_fd8b4c498974961d95977aed12cfa51f.bindPopup(popup_f4252ec62f3178d548afd9cc249ef7f8)
+        ;
+
+        
+    
+    
+            var circle_marker_971235ad63533e8c1a6a56b382132271 = L.circleMarker(
+                [10.7733785, 106.6823843],
+                {"bubblingMouseEvents": true, "color": "#e6194b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e6194b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_18f2e9d8cda469c493c014ac479f8a1d);
+        
+    
+        var popup_c982fcd08d1eb9f184995c64dbf71b9b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_189ec8401b555d7190f97407c0b352e8 = $(`<div id="html_189ec8401b555d7190f97407c0b352e8" style="width: 100.0%; height: 100.0%;">0 - 2981 - COZRUM HOMES AURORA HOUSE</div>`)[0];
+            popup_c982fcd08d1eb9f184995c64dbf71b9b.setContent(html_189ec8401b555d7190f97407c0b352e8);
+        
+
+        circle_marker_971235ad63533e8c1a6a56b382132271.bindPopup(popup_c982fcd08d1eb9f184995c64dbf71b9b)
+        ;
+
+        
+    
+    
+            var circle_marker_b0d58227fd35ed1378268eefeed27f5a = L.circleMarker(
+                [10.7371149, 106.69103919999998],
+                {"bubblingMouseEvents": true, "color": "#3cb44b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3cb44b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_18f2e9d8cda469c493c014ac479f8a1d);
+        
+    
+        var popup_67252e00e1a08af2185c6965a3db8c47 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_34669539a51295a1dfcd95d50b9d278a = $(`<div id="html_34669539a51295a1dfcd95d50b9d278a" style="width: 100.0%; height: 100.0%;">1 - 722 - LYN MINI HOTEL</div>`)[0];
+            popup_67252e00e1a08af2185c6965a3db8c47.setContent(html_34669539a51295a1dfcd95d50b9d278a);
+        
+
+        circle_marker_b0d58227fd35ed1378268eefeed27f5a.bindPopup(popup_67252e00e1a08af2185c6965a3db8c47)
+        ;
+
+        
+    
+    
+            var circle_marker_bb367949178057c9682919ead055afde = L.circleMarker(
+                [10.7614502, 106.6974974],
+                {"bubblingMouseEvents": true, "color": "#3cb44b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3cb44b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_18f2e9d8cda469c493c014ac479f8a1d);
+        
+    
+        var popup_5006ac6c1f1c57fb8a4e406d3321a1dd = L.popup({"maxWidth": "100%"});
+
+        
+            var html_45a25617da5a5baabe2a71e79edef949 = $(`<div id="html_45a25617da5a5baabe2a71e79edef949" style="width: 100.0%; height: 100.0%;">1 - 726 - A IN RIVERSIDE HOTEL</div>`)[0];
+            popup_5006ac6c1f1c57fb8a4e406d3321a1dd.setContent(html_45a25617da5a5baabe2a71e79edef949);
+        
+
+        circle_marker_bb367949178057c9682919ead055afde.bindPopup(popup_5006ac6c1f1c57fb8a4e406d3321a1dd)
+        ;
+
+        
+    
+    
+            var circle_marker_3ccd5da1deb716718b3f84f9b2d5089f = L.circleMarker(
+                [10.7597549, 106.6723558],
+                {"bubblingMouseEvents": true, "color": "#3cb44b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3cb44b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_18f2e9d8cda469c493c014ac479f8a1d);
+        
+    
+        var popup_47b1b6fc780623f8d96ed1f912e93903 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_2ae4a75e05f6d669fa6242f915e87708 = $(`<div id="html_2ae4a75e05f6d669fa6242f915e87708" style="width: 100.0%; height: 100.0%;">1 - 730 - BONITA HÙNG VƯƠNG</div>`)[0];
+            popup_47b1b6fc780623f8d96ed1f912e93903.setContent(html_2ae4a75e05f6d669fa6242f915e87708);
+        
+
+        circle_marker_3ccd5da1deb716718b3f84f9b2d5089f.bindPopup(popup_47b1b6fc780623f8d96ed1f912e93903)
+        ;
+
+        
+    
+    
+            var circle_marker_205757bd120d207fb791a590a7f143ec = L.circleMarker(
+                [10.7979658, 106.729704],
+                {"bubblingMouseEvents": true, "color": "#ffe119", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffe119", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_18f2e9d8cda469c493c014ac479f8a1d);
+        
+    
+        var popup_d9bfb588cf62b004d08b7a0df252aa10 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1d8697fc886027e7997fe0bf0aef80de = $(`<div id="html_1d8697fc886027e7997fe0bf0aef80de" style="width: 100.0%; height: 100.0%;">2 - 910 - A IN HOTEL GLAMOUR</div>`)[0];
+            popup_d9bfb588cf62b004d08b7a0df252aa10.setContent(html_1d8697fc886027e7997fe0bf0aef80de);
+        
+
+        circle_marker_205757bd120d207fb791a590a7f143ec.bindPopup(popup_d9bfb588cf62b004d08b7a0df252aa10)
+        ;
+
+        
+    
+    
+            var circle_marker_96b814599f5b1875b31c1c8fbe973f73 = L.circleMarker(
+                [10.7648949, 106.6950513],
+                {"bubblingMouseEvents": true, "color": "#ffe119", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffe119", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_18f2e9d8cda469c493c014ac479f8a1d);
+        
+    
+        var popup_8e5b6ab652b25d38d28e285867a1c988 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d206f168cb15330f0b120f1bc949225d = $(`<div id="html_d206f168cb15330f0b120f1bc949225d" style="width: 100.0%; height: 100.0%;">2 - 1721 - A IN HOTEL DEL LUNA</div>`)[0];
+            popup_8e5b6ab652b25d38d28e285867a1c988.setContent(html_d206f168cb15330f0b120f1bc949225d);
+        
+
+        circle_marker_96b814599f5b1875b31c1c8fbe973f73.bindPopup(popup_8e5b6ab652b25d38d28e285867a1c988)
+        ;
+
+        
+    
+</script>
